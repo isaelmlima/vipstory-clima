@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>VIP Story Clima</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -15,76 +18,144 @@
 }
 
 body{
+
     width:100vw;
     height:100vh;
     overflow:hidden;
 
     background:
     linear-gradient(
-    180deg,
-    #071B45 0%,
-    #0E4EA6 100%);
+        180deg,
+        #0a2d7a 0%,
+        #4da3ff 100%
+    );
 
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:'Montserrat',sans-serif;
     color:white;
 }
 
 .container{
+
     height:100vh;
 
     display:flex;
-
     flex-direction:column;
 
     align-items:center;
 
     justify-content:space-between;
 
-    padding:60px 40px;
+    padding:40px 40px 65px 40px;
+}
+
+.topo{
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
 }
 
 .logo{
+
     width:320px;
+    margin-bottom:10px;
+}
+
+.marca{
+
+    font-size:48px;
+    font-weight:800;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+}
+
+.submarca{
+
+    font-size:18px;
+
+    letter-spacing:12px;
+
+    margin-top:8px;
+
+    opacity:.85;
 }
 
 .local{
+
     font-size:34px;
-    letter-spacing:1px;
-    opacity:.9;
+
+    opacity:.92;
+
+    margin-bottom:15px;
+}
+
+.icone{
+
+    font-size:65px;
+
+    margin-bottom:5px;
 }
 
 .temperatura{
+
     font-size:170px;
-    font-weight:bold;
+
+    font-weight:800;
+
+    line-height:1;
 }
 
 .descricao{
-    font-size:40px;
-    opacity:.9;
+
+    font-size:36px;
+
+    margin-top:10px;
+
+    opacity:.92;
 }
 
 .info{
+
     text-align:center;
-    line-height:1.8;
-    font-size:34px;
+
+    line-height:1.9;
+
+    font-size:32px;
+
+    opacity:.95;
 }
 
 .hora{
-    font-size:42px;
+
     text-align:center;
+
+    font-size:40px;
+
+    font-weight:500;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div>
+<div class="topo">
 
-<img src="logo.png"
-class="logo">
+<img src="logo.png" class="logo">
+
+<div class="marca">
+VIP STORY
+</div>
+
+<div class="submarca">
+MÍDIA
+</div>
 
 </div>
 
@@ -92,6 +163,10 @@ class="logo">
 
 <div class="local">
 Padre Bernardo • GO
+</div>
+
+<div class="icone">
+☀
 </div>
 
 <div class="temperatura">
@@ -126,13 +201,13 @@ function atualizarHora(){
 
 const agora = new Date();
 
-document.getElementById('hora')
-.innerHTML =
-agora.toLocaleDateString('pt-BR')
+document.getElementById("hora").innerHTML =
+
+agora.toLocaleDateString("pt-BR")
 +
-'<br>'
+"<br>"
 +
-agora.toLocaleTimeString('pt-BR');
+agora.toLocaleTimeString("pt-BR");
 
 }
 
