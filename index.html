@@ -3,29 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>VIP Story Clima</title>
 
 <style>
-body{
+
+*{
     margin:0;
-    height:100vh;
-    background:#071B45;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-family:Arial, sans-serif;
+    padding:0;
+    box-sizing:border-box;
 }
 
-h1{
-    font-size:60px;
+body{
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+    180deg,
+    #071B45 0%,
+    #0E4EA6 100%);
+
+    font-family:Arial, Helvetica, sans-serif;
+    color:white;
 }
+
+.container{
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:60px 40px;
+}
+
+.logo{
+    width:320px;
+}
+
+.local{
+    font-size:34px;
+    letter-spacing:1px;
+    opacity:.9;
+}
+
+.temperatura{
+    font-size:170px;
+    font-weight:bold;
+}
+
+.descricao{
+    font-size:40px;
+    opacity:.9;
+}
+
+.info{
+    text-align:center;
+    line-height:1.8;
+    font-size:34px;
+}
+
+.hora{
+    font-size:42px;
+    text-align:center;
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>VIP STORY CLIMA</h1>
+<div class="container">
+
+<div>
+
+<img src="logo.png"
+class="logo">
+
+</div>
+
+<div>
+
+<div class="local">
+Padre Bernardo • GO
+</div>
+
+<div class="temperatura">
+28°
+</div>
+
+<div class="descricao">
+Carregando clima...
+</div>
+
+</div>
+
+<div class="info">
+
+Máx: --°<br>
+
+Mín: --°<br>
+
+Umidade: --%
+
+</div>
+
+<div class="hora" id="hora">
+
+</div>
+
+</div>
+
+<script>
+
+function atualizarHora(){
+
+const agora = new Date();
+
+document.getElementById('hora')
+.innerHTML =
+agora.toLocaleDateString('pt-BR')
++
+'<br>'
++
+agora.toLocaleTimeString('pt-BR');
+
+}
+
+atualizarHora();
+
+setInterval(atualizarHora,1000);
+
+</script>
 
 </body>
 </html>
