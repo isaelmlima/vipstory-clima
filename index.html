@@ -215,6 +215,7 @@ const resposta = await fetch(
 "https://api.open-meteo.com/v1/forecast?latitude=-15.16&longitude=-48.28&current=temperature_2m,relative_humidity_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo"
 );
 
+
 const dados = await resposta.json();
 
 document.getElementById("temperatura").innerHTML =
