@@ -206,24 +206,89 @@ Umidade: --%
 </div>
 
 <script>
+    
+async function atualizarClima() {
 
+try {
+
+const resposta = await fetch(
+"https://api.open-meteo.com/v1/forecast?latitude=-15.16&longitude=-48.28&current=temperature_2m,relative_humidity_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo"
+);
+
+const dados = await resposta.json();
+
+document.getElementById("temperatura").innerHTML =
+Math.round(dados.current.temperature_2m) + "°";
+
+document.getElementById("maxima").innerHTML =
+"Máx: " +
+Math.round(dados.daily.temperature_2m_max[0]) +
+"°";
+
+document.getElementById("minima").innerHTML =
+"Mín: " +
+Math.round(dados.daily.temperature_2m_min[0]) +
+"°";
+
+document.getElementById("umidade").innerHTML =
+"Umidade: " +
+dados.current.relative_humidity_2m +
+"%";
+
+let codigo = dados.current.weather_code;
+
+let descricao = "Céu limpo";
+let icone = "☀";
+
+if (codigo >= 1 && codigo <= 3) {
+descricao = "Parcialmente nublado";
+icone = "⛅";
+}
+
+if (codigo >= 45) {
+descricao = "Neblina";
+icone = "🌫";
+}
+
+if (codigo >= 51) {
+descricao = "Chuva";
+icone = "🌧";
+}
+
+document.getElementById("descricao").innerHTML =
+descricao;
+
+document.getElementById("icone").innerHTML =
+icone;
+
+}
+catch(erro){
+
+document.getElementById("descricao").innerHTML =
+"Sem conexão";
+
+}
+
+}
 function atualizarHora(){
 
-const agora = new Date();
+    const agora = new Date();
 
-document.getElementById("hora").innerHTML =
+    document.getElementById("hora").innerHTML =
 
-agora.toLocaleDateString("pt-BR")
-+
-"<br>"
-+
-agora.toLocaleTimeString("pt-BR");
+    agora.toLocaleDateString("pt-BR")
+    +
+    "<br>"
+    +
+    agora.toLocaleTimeString("pt-BR");
 
 }
 
 atualizarHora();
+atualizarClima();
 
 setInterval(atualizarHora,1000);
+setInterval(atualizarClima,600000);
 
 </script>
 
