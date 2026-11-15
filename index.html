@@ -286,7 +286,10 @@ function atualizarHora(){
 
     document.getElementById("hora").innerHTML =
 
-    agora.toLocaleDateString("pt-BR")
+    agora.toLocaleDateString("pt-BR") {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
     +
     "<br>"
     +
@@ -296,7 +299,7 @@ function atualizarHora(){
 
 atualizarClima();
 
-setInterval(atualizarHora,1000);
+setInterval(atualizarHora,60000);
 setInterval(atualizarClima,600000);
 
 </script>
