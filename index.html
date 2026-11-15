@@ -248,21 +248,21 @@ dados.current.relative_humidity_2m +
 let codigo = dados.current.weather_code;
 
 let descricao = "Céu limpo";
-let icone = "☀";
+let icone = "sol.png";
 
 if (codigo >= 1 && codigo <= 3) {
 descricao = "Parcialmente nublado";
-icone = "⛅";
+icone = "parcial.png";
 }
 
 if (codigo >= 45) {
 descricao = "Neblina";
-icone = "🌫";
+icone = "neblina.png";
 }
 
 if (codigo >= 51) {
 descricao = "Chuva";
-icone = "🌧";
+icone = "chuva.png";
 }
 
 document.getElementById("descricao").innerHTML =
