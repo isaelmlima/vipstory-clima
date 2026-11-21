@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VIP Story Clima</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        180deg,
+        #0a2d7a 0%,
+        #4da3ff 100%
+    );
+
+    font-family:'Montserrat',sans-serif;
+    color:white;
+}
+
+.container{
+
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:40px 40px 65px 40px;
+}
+
+.topo{
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+}
+
+.logo{
+
+    width:320px;
+    margin-bottom:15px;
+}
+
+.marca{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:42px;
+
+    margin-top:-10px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,.15);
+}
+
+.submarca{
+
+    font-size:32px;
+
+    letter-spacing:6px;
+
+    margin-top:6px;
+
+    opacity:.9;
+}
+
+.local{
+
+    font-size:34px;
+
+    opacity:.92;
+    
+    margin-top:20px;
+
+    margin-bottom:10px;
+}
+
+.icone{
+
+    font-size:65px;
+
+    margin-bottom:3px;
+}
+
+.temperatura{
+
+    font-size:55px;
+
+    text-align:center;
+
+    font-weight:300;
+
+    margin-bottom:8px;
+
+    line-height:1;
+}
+
+.descricao{
+
+    font-size:36px;
+
+    text-align:center;
+
+    margin-top:10px;
+
+    margin-bottom:30px;
+
+    opacity:.92;
+}
+.info{
+
+    text-align:center;
+
+    margin-top:-2px;
+
+    line-height:1.4;
+
+    font-size:32px;
+
+    opacity:.95;
+}
+
+.hora{
+
+    text-align:center;
+
+    font-size:26px;
+
+    font-weight:300;
+    
+    opacity:.9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="topo">
+
+<img src="logo.png" class="logo">
+
+<div class="marca">
+VIP STORY
+</div>
+
+<div class="submarca">
+MÍDIA
+</div>
+
+</div>
+
+<div>
+
+<div class="local">
+Padre Bernardo • GO
+</div>
+
+<div class="icone" id="icone">
+☀
+</div>
+
+<div class="descricao" id="descricao">
+Carregando clima...
+</div>
+
+<div class="temperatura" id="temperatura">
+--
+</div>
+
+</div>
+
+<div class="info">
+
+<div id="maxima">
+Máx: --°
+</div>
+
+<div id="minima">
+Mín: --°
+</div>
+
+<div id="umidade">
+Umidade: --%
+</div>
+
+<div id="hora">
+00:00
+</div>
+    
+</div>
+
+<script>
+    
+async function atualizarClima() {
+
+document.getElementById("descricao").innerHTML =
+"VIP STORY ONLINE";
+
+try {
+
+const resposta = await fetch(
+"https://api.open-meteo.com/v1/forecast?latitude=-15.16&longitude=-48.28&current=temperature_2m,relative_humidity_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo"
+);
+
+
+const dados = await resposta.json();
+
+document.getElementById("temperatura").innerHTML =
+Math.round(dados.current.temperature_2m) + "°";
+
+document.getElementById("maxima").innerHTML =
+"Máx: " +
+Math.round(dados.daily.temperature_2m_max[0]) +
+"°";
+
+document.getElementById("minima").innerHTML =
+"Mín: " +
+Math.round(dados.daily.temperature_2m_min[0]) +
+"°";
+
+document.getElementById("umidade").innerHTML =
+"Umidade: " +
+dados.current.relative_humidity_2m +
+"%";
+
+let codigo = dados.current.weather_code;
+
+let descricao = "Céu limpo";
+let icone = "sol.png";
+
+if (codigo >= 1 && codigo <= 3) {
+descricao = "Parcialmente nublado";
+icone = "parcial.png";
+}
+
+if (codigo >= 45) {
+descricao = "Neblina";
+icone = "neblina.png";
+}
+
+if (codigo >= 51) {
+descricao = "Chuva";
+icone = "chuva.png";
+}
+
+document.getElementById("descricao").innerHTML =
+descricao;
+
+document.getElementById("icone").innerHTML =
+'<img src="img/' + icone + '" width="300">';
+}
+catch(erro){
+
+document.getElementById("descricao").innerHTML =
+"Sem conexão";
+
+}
+
+}
+function atualizarHora(){
+
+    const agora = new Date();
+
+    document.getElementById("hora").innerHTML =
+
+    agora.toLocaleDateString("pt-BR")
+    +
+    "<br>"
+    +
+    agora.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit"
+});
+}
+
+atualizarHora();
+atualizarClima();
+
+setInterval(atualizarHora,60000);
+setInterval(atualizarClima,600000);
+
+</script>
+
+</body>
+</html>
