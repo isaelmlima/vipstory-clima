@@ -39,7 +39,7 @@ body{
     height:100vh;
 
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
 
     align-items:center;
 
@@ -120,9 +120,7 @@ body{
     margin-bottom:8px;
 
     line-height:1;
-}
-
-.descricao{
+      .descricao{
 
     font-size:36px;
 
@@ -134,6 +132,7 @@ body{
 
     opacity:.92;
 }
+
 .info{
 
     text-align:center;
@@ -166,58 +165,65 @@ body{
 
 <div class="container">
 
-<div class="topo">
+    <div class="lado-esquerdo">
 
-<img src="logo.png" class="logo">
+        <div class="topo">
 
-<div class="marca">
-VIP STORY
+            <img src="logo.png" class="logo">
+
+            <div class="marca">
+                VIP STORY
+            </div>
+
+            <div class="submarca">
+                MÍDIA
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="lado-direito">
+
+        <div class="local">
+            Padre Bernardo • GO
+        </div>
+
+        <div class="icone" id="icone">
+            ☀
+        </div>
+
+        <div class="descricao" id="descricao">
+            Carregando clima...
+        </div>
+
+        <div class="temperatura" id="temperatura">
+            --
+        </div>
+
+        <div class="info">
+
+            <div id="maxima">
+                Máx: --°
+            </div>
+
+            <div id="minima">
+                Mín: --°
+            </div>
+
+            <div id="umidade">
+                Umidade: --%
+            </div>
+
+            <div id="hora">
+                00:00
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-
-<div class="submarca">
-MÍDIA
-</div>
-
-</div>
-
-<div>
-
-<div class="local">
-Padre Bernardo • GO
-</div>
-
-<div class="icone" id="icone">
-☀
-</div>
-
-<div class="descricao" id="descricao">
-Carregando clima...
-</div>
-
-<div class="temperatura" id="temperatura">
---
-</div>
-
-</div>
-
-<div class="info">
-
-<div id="maxima">
-Máx: --°
-</div>
-
-<div id="minima">
-Mín: --°
-</div>
-
-<div id="umidade">
-Umidade: --%
-</div>
-
-<div id="hora">
-00:00
-</div>
-    
 </div>
 
 <script>
